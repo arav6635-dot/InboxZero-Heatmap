@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InboxZero Heatmap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="hero">
+      <p class="eyebrow">INBOXZERO</p>
+      <h1>Heatmap</h1>
+      <p class="subtitle">
+        Upload Gmail takeout or manual CSV. See when email hits, who burns your focus,
+        and what type of messages dominate your week.
+      </p>
+    </header>
+
+    <main class="container">
+      <section class="panel uploader">
+        <h2>Upload Data</h2>
+        <p class="hint">
+          Expected columns: <code>Date</code>, <code>From</code>, <code>Subject</code>
+        </p>
+
+        <label class="dropzone" for="fileInput" id="dropzone">
+          <input type="file" id="fileInput" accept=".csv" />
+          <span class="drop-title">Drop CSV here or click to upload</span>
+          <span class="drop-sub">Gmail takeout CSV works best</span>
+        </label>
+
+        <div class="uploader-actions">
+          <button id="loadSample" class="ghost">Load sample data</button>
+          <button id="openCsvGuide" class="ghost">How to get CSV</button>
+        </div>
+
+        <div class="google-connect">
+          <p class="hint">
+            Or connect Gmail directly (configured from server environment).
+          </p>
+          <div class="uploader-actions">
+            <button id="connectGoogle" class="ghost">Connect Google Inbox</button>
+            <button id="disconnectGoogle" class="ghost">Disconnect</button>
+          </div>
+          <p id="googleStatus" class="hint">Google status: not connected.</p>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <article class="panel metric-card">
+          <p>Total Emails</p>
+          <h3 id="totalEmails">0</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>Top Time Sink</p>
+          <h3 id="topSender">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>Peak Hour</p>
+          <h3 id="peakHour">-</h3>
+        </article>
+      </section>
+
+      <section class="panel chart-card">
+        <div class="card-head">
+          <h2>Email Hit Heatmap</h2>
+          <p>Days vs. hours</p>
+        </div>
+        <div class="card-actions">
+          <button class="ghost export-btn" data-chart="heatmap" data-format="png">Export PNG</button>
+          <button class="ghost export-btn" data-chart="heatmap" data-format="pdf">Export PDF</button>
+        </div>
+        <section class="heatmap-shell" aria-label="Email hit heatmap">
+          <div id="heatmapAxis" class="heatmap-axis"></div>
+          <div id="heatmapRows" class="heatmap-rows"></div>
+          <div id="heatmapLegend" class="heatmap-legend"></div>
+          <div class="heatmap-insight">
+            <strong>Insight:</strong> Brighter cells indicate higher email volume at that time
+          </div>
+        </section>
+      </section>
+
+      <section class="grid-2">
+        <article class="panel chart-card">
+          <div class="card-head">
+            <h2>Who Wastes Most of Your Time</h2>
+            <p>Top senders by volume</p>
+          </div>
+          <div class="card-actions">
+            <button class="ghost export-btn" data-chart="senders" data-format="png">Export PNG</button>
+            <button class="ghost export-btn" data-chart="senders" data-format="pdf">Export PDF</button>
+          </div>
+          <ul id="senderList" class="sender-list"></ul>
+        </article>
+
+        <article class="panel chart-card">
+          <div class="card-head">
+            <h2>Email Types</h2>
+            <p>Pie by detected category</p>
+          </div>
+          <div class="card-actions">
+            <button class="ghost export-btn" data-chart="types" data-format="png">Export PNG</button>
+            <button class="ghost export-btn" data-chart="types" data-format="pdf">Export PDF</button>
+          </div>
+          <canvas id="typeChart" width="320" height="320"></canvas>
+          <ul id="typeLegend" class="legend"></ul>
+        </article>
+      </section>
+
+    </main>
+
+    <div id="csvGuideModal" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="csvGuideTitle">
+        <div class="modal-head">
+          <h2 id="csvGuideTitle">How To Generate Gmail CSV</h2>
+          <button id="closeCsvGuide" class="ghost modal-close" aria-label="Close popup">Close</button>
+        </div>
+        <ol>
+          <li>Go to Google Takeout and export only <code>Mail</code>.</li>
+          <li>Download the archive and extract it. Gmail data comes as <code>.mbox</code>, not CSV.</li>
+          <li>Convert <code>.mbox</code> to CSV using any converter/script so columns include <code>Date</code>, <code>From</code>, and <code>Subject</code>.</li>
+          <li>Upload that CSV here to generate charts and exports.</li>
+        </ol>
+      </div>
+    </div>
+
+    <footer>
+      <p>Built for clarity. Focus starts with visibility.</p>
+    </footer>
+
+    <script async defer src="https://accounts.google.com/gsi/client"></script>
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    <script src="/config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
