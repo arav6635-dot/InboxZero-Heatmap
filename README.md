@@ -30,6 +30,7 @@ node server.js
 3. Add these exact origins in authorized JavaScript origins:
    - `http://localhost:5500`
    - `http://127.0.0.1:5500` (if you ever run on 127.0.0.1)
+   - `https://<your-netlify-site>.netlify.app` (for Netlify deploys)
 4. Create an API key and restrict it to Gmail API.
 5. Set `GOOGLE_CLIENT_ID` and `GOOGLE_API_KEY` in `.env`.
 6. Click `Connect Google Inbox` in the app.
@@ -69,3 +70,12 @@ Date,From,Subject
 
 ## Restrictions
 As we are using free tier hosting, input mails are fixed to 500 mails max.
+
+## Netlify deploy notes
+This repo includes a Netlify Function that serves `/config.js` from Netlify environment variables.
+
+1. In Netlify project settings, add:
+   - `GOOGLE_CLIENT_ID`
+   - `GOOGLE_API_KEY`
+2. Deploy the repo as-is (the `netlify.toml` is already configured).
+3. Make sure your Google OAuth authorized JavaScript origins includes your Netlify domain.
