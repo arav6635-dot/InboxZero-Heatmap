@@ -49,6 +49,12 @@ Use headers that include:
 - `From`
 - `Subject`
 
+## Privacy-safe sample CSV downloads
+Synthetic files (no real user data) are included for testing:
+- `/sample-data/sample-email-small.csv`
+- `/sample-data/sample-email-workload.csv`
+- `/sample-data/sample-email-mixed.csv`
+
 Example:
 
 ```csv

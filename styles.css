@@ -146,6 +146,18 @@ button.ghost:hover {
   border-color: var(--neon);
 }
 
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.sample-downloads {
+  margin-top: 0.8rem;
+}
+
 .uploader-actions {
   display: flex;
   gap: 0.55rem;
