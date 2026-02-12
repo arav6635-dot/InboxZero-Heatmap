@@ -31,6 +31,7 @@ node server.js
    - `http://localhost:5500`
    - `http://127.0.0.1:5500` (if you ever run on 127.0.0.1)
    - `https://<your-netlify-site>.netlify.app` (for Netlify deploys)
+   - `https://<your-vercel-domain>.vercel.app` (for Vercel deploys)
 4. Create an API key and restrict it to Gmail API.
 5. Set `GOOGLE_CLIENT_ID` and `GOOGLE_API_KEY` in `.env`.
 6. Click `Connect Google Inbox` in the app.
@@ -85,3 +86,14 @@ This repo includes a Netlify Function that serves `/config.js` from Netlify envi
    - `GOOGLE_API_KEY`
 2. Deploy the repo as-is (the `netlify.toml` is already configured).
 3. Make sure your Google OAuth authorized JavaScript origins includes your Netlify domain.
+
+## Vercel deploy notes
+This repo includes a Vercel API function (`api/config.js`) and rewrite (`vercel.json`) so `/config.js` is served from Vercel environment variables.
+
+1. In Vercel project settings, add:
+   - `GOOGLE_CLIENT_ID`
+   - `GOOGLE_API_KEY`
+2. Redeploy the project after adding/updating env vars.
+3. Verify config endpoint:
+   - `https://<your-vercel-domain>.vercel.app/config.js`
+4. Make sure your Google OAuth authorized JavaScript origins includes your Vercel domain.
