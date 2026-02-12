@@ -20,7 +20,7 @@ const colors = ["#72d6ff", "#61e3ff", "#96f2ff", "#b8e6ff", "#7dd6ff", "#6ef9ff"
 const GOOGLE_DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 const GOOGLE_GMAIL_SCOPE = "https://www.googleapis.com/auth/gmail.readonly";
 const GMAIL_QUERY = "in:inbox newer_than:365d";
-const GMAIL_MAX_MESSAGES = 500;
+const GMAIL_MAX_MESSAGES = 50;
 
 const fileInput = document.getElementById("fileInput");
 const dropzone = document.getElementById("dropzone");
